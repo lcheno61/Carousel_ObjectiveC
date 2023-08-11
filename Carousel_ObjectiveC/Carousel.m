@@ -74,7 +74,7 @@
     if ([_resourceArray count] > nowIndex) {
         NSDictionary *dic = [_resourceArray objectAtIndex: nowIndex];
         NSString *urlString = [dic objectForKey: @"url"];
-        if (![urlString hasPrefix: @"https://"] && ![urlString hasPrefix: @"http://"]) {
+        if (![urlString hasPrefix: @"http"]) {
             urlString = [NSString stringWithFormat:@"https://%@", urlString];
         }
         return [NSURL URLWithString: urlString];

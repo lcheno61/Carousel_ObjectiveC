@@ -18,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E9ED88882A862AF7007EEE99 /* Carousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Carousel.h; sourceTree = "<group>"; };
 		E9FA91C32A8392AA00C5293F /* Carousel_ObjectiveC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Carousel_ObjectiveC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9FA91C62A8392AA00C5293F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E9FA91C72A8392AA00C5293F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -29,7 +30,6 @@
 		E9FA91D72A8392AC00C5293F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E9FA91D82A8392AC00C5293F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E9FA91DF2A83953900C5293F /* Carousel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Carousel.m; sourceTree = "<group>"; };
-		E9FA91E12A83956A00C5293F /* Carousel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Carousel.h; path = "../../../../../Library/Mobile Documents/com~apple~CloudDocs/Carousel.h"; sourceTree = "<group>"; };
 		E9FA91E22A84E7CF00C5293F /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +74,7 @@
 				E9FA91D72A8392AC00C5293F /* Info.plist */,
 				E9FA91D82A8392AC00C5293F /* main.m */,
 				E9FA91DF2A83953900C5293F /* Carousel.m */,
-				E9FA91E12A83956A00C5293F /* Carousel.h */,
+				E9ED88882A862AF7007EEE99 /* Carousel.h */,
 			);
 			path = Carousel_ObjectiveC;
 			sourceTree = "<group>";
