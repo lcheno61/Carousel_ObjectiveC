@@ -68,46 +68,26 @@
     return currentIndex % count;
 }
 
+- (NSURL *) getCurrentURL {
+    int count = (int)[_resourceArray count];
+    int nowIndex = currentIndex % count;
+    if ([_resourceArray count] > nowIndex) {
+        NSDictionary *dic = [_resourceArray objectAtIndex: nowIndex];
+        NSString *urlString = [dic objectForKey: @"url"];
+        if (![urlString hasPrefix: @"https://"] && ![urlString hasPrefix: @"http://"]) {
+            urlString = [NSString stringWithFormat:@"https://%@", urlString];
+        }
+        return [NSURL URLWithString: urlString];
+    }
+    return nil;
+}
+
+
 - (void) invalidateTimer {
     [switchPageTimer invalidate];
 }
 
 #pragma mark - Private
-//- (void) setupScrollView: (CGRect) frame {
-//    CGRect mframe = CGRectMake(0, 0, frame.size.width, frame.size.height);
-//
-//    _scrollView = [[UIScrollView alloc] initWithFrame: mframe];
-//    _scrollView.contentSize = CGSizeMake(frameWidth*3, 0);
-//    _scrollView.pagingEnabled = YES;
-//    _scrollView.showsVerticalScrollIndicator = NO;
-//    _scrollView.showsHorizontalScrollIndicator = NO;
-//    _scrollView.delegate = self;
-//    [self addSubview:  _scrollView];
-//
-//    _lastImageView = [[UIImageView alloc]initWithFrame:mframe];
-//    mframe.origin.x = frameWidth;
-//    _nowShowingImageView = [[UIImageView alloc]initWithFrame:mframe];
-//    mframe.origin.x = frameWidth * 2;
-//    _nextImageView = [[UIImageView alloc]initWithFrame:mframe];
-//
-//    _lastImageView.backgroundColor = [UIColor redColor];
-//    _nowShowingImageView.backgroundColor = [UIColor yellowColor];
-//    _nextImageView.backgroundColor = [UIColor greenColor];
-//
-//
-//    _dotsPageControl = [[UIPageControl alloc] initWithFrame: CGRectMake(0, mframe.size.height - 35, frameWidth, 35)];
-//    _dotsPageControl.backgroundColor = [UIColor clearColor];
-//    _dotsPageControl.currentPageIndicatorTintColor = [UIColor whiteColor];
-//    _dotsPageControl.pageIndicatorTintColor = [[UIColor lightGrayColor] colorWithAlphaComponent: 0.5];
-//    _dotsPageControl.currentPage = currentIndex;
-//    [self addSubview: _dotsPageControl];
-//
-//    [_scrollView addSubview: _lastImageView];
-//    [_scrollView addSubview: _nowShowingImageView];
-//    [_scrollView addSubview: _nextImageView];
-//
-//}
-
 - (void) setupScrollView {
     _scrollView = [[UIScrollView alloc] init];
     _scrollView.contentSize = CGSizeMake(self.frame.size.width * 3, 0);

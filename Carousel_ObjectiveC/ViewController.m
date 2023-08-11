@@ -8,6 +8,7 @@
 #import "Carousel.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) Carousel *carouselView;
 @end
 
 @implementation ViewController
@@ -18,13 +19,11 @@
     NSMutableArray *mutableArray = [[NSMutableArray alloc] init];
     NSArray *imageList = @[@"banner1", @"banner2", @"banner3", @"banner4"];
     NSArray *urlList = @[@"www.google.com", @"chat.openai.com", @"www.apple.com", @"www.android.com"];
-    //[imageList count]
-    for (int i = 0; i < 1; i++ ) {
+    for (int i = 0; i < [imageList count]; i++ ) {
         NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys: imageList[i], @"image",
                                                                         urlList[i], @"url", nil];
         [mutableArray addObject: dic];
     }
-//    NSLog(@"%@", mutableArray);
     
     UILabel *title = [[UILabel alloc] init];
     [title setText: @"Carousel Sample"];
@@ -41,24 +40,31 @@
     CGFloat carouselHeight = carouselWidth / image.size.width * image.size.height;
     CGRect mFrame = CGRectMake(0, 0, carouselWidth, carouselHeight);
 
-    Carousel *carouselView = [[Carousel alloc] initWithFrame: mFrame];
-    carouselView.layer.cornerRadius = 4;
-    carouselView.layer.masksToBounds = true;
-    [carouselView setTranslatesAutoresizingMaskIntoConstraints: false];
-    [self.view addSubview: carouselView];
-    [carouselView.leadingAnchor constraintEqualToAnchor: self.view.leadingAnchor constant: widthInset].active = true;
-    [carouselView.topAnchor  constraintEqualToAnchor: title.bottomAnchor constant: 20].active = true;
-    [carouselView.widthAnchor constraintEqualToConstant: carouselWidth].active = true;
-    [carouselView.heightAnchor constraintEqualToConstant: carouselHeight].active = true;
+    Carousel *mCrouselView = [[Carousel alloc] initWithFrame: mFrame];
+    _carouselView = mCrouselView;
+    [_carouselView.layer setCornerRadius: 4];
+    [_carouselView.layer setMasksToBounds: true];
+    [_carouselView setTranslatesAutoresizingMaskIntoConstraints: false];
+    [self.view addSubview: _carouselView];
+    [_carouselView.leadingAnchor constraintEqualToAnchor: self.view.leadingAnchor constant: widthInset].active = true;
+    [_carouselView.topAnchor  constraintEqualToAnchor: title.bottomAnchor constant: 20].active = true;
+    [_carouselView.widthAnchor constraintEqualToConstant: carouselWidth].active = true;
+    [_carouselView.heightAnchor constraintEqualToConstant: carouselHeight].active = true;
 
-    [carouselView setResourceArray: mutableArray];
+    [_carouselView setResourceArray: mutableArray];
     
-//    CGRect mframe = CGRectMake(0, 0, 300, 168);
-//    UIImageView *lastImageView = [[UIImageView alloc]initWithFrame:mframe];
-//    [self.view addSubview: lastImageView];
-//    [lastImageView setImage:[UIImage imageNamed:@"banner1"]];
-    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector(tapAction:)];
+    [_carouselView addGestureRecognizer: tapRecognizer];
 }
 
+- (void) tapAction: (UIGestureRecognizer *) gestureRecognizer {
+
+    NSURL *url = [_carouselView getCurrentURL];
+    if (url != nil) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[UIApplication sharedApplication] openURL: url options: nil completionHandler: nil];
+        });
+    }
+}
 
 @end
